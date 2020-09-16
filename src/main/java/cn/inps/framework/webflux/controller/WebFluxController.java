@@ -9,10 +9,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public class WebFluxController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, WebFlux !";
-    }
+//    @GetMapping("/hello")
+//    public String hello() {
+//        return "Hello, WebFlux !";
+//    }
 
     @GetMapping("/user")
     public Mono<User> getUser() {
