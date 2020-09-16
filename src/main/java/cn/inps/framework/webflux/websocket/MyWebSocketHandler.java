@@ -2,11 +2,14 @@ package cn.inps.framework.webflux.websocket;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.reactive.socket.*;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class MyWebSocketHandler implements WebSocketHandler {
+public class MyWebSocketHandler implements WebSocketHandler, CorsConfigurationSource {
 //    @Autowired
 //    private TokenService tokenService;
 
@@ -36,5 +39,11 @@ public class MyWebSocketHandler implements WebSocketHandler {
                     return session.textMessage("Echo " + value);
                 });
         return session.send(output);
+    }
+    @Override
+    public CorsConfiguration getCorsConfiguration(ServerWebExchange exchange) {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        return configuration;
     }
 }
